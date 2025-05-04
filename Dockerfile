@@ -16,15 +16,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql zip mbstring gd xml intl \
     && apt-get clean
 
-suitecrm-on-render/
-├── Dockerfile
-├── docker-compose.yml
-├── render.yaml
-├── index.php
-├── install.php
-├── modules/
-├── themes/
-└── ...
+
 
 
 # Enable Apache rewrite module
