@@ -16,6 +16,17 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql zip mbstring gd xml intl \
     && apt-get clean
 
+suitecrm-on-render/
+├── Dockerfile
+├── docker-compose.yml
+├── render.yaml
+├── index.php
+├── install.php
+├── modules/
+├── themes/
+└── ...
+
+
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
@@ -31,6 +42,11 @@ RUN chown -R www-data:www-data /var/www/html \
 
 # Set DirectoryIndex in case Apache config misses it
 RUN echo "DirectoryIndex index.php index.html" >> /etc/apache2/apache2.conf
+
+RUN echo "<Directory /var/www/html>\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>" > /etc/apache2/conf-available/allow.conf && a2enconf allow
 
 # Expose port 80
 EXPOSE 80
